@@ -8,18 +8,19 @@
 </template>
 
 <script setup>
-const { ref } = require("@vue/reactivity");
+import { ref } from "@vue/reactivity";
+import { signup } from "../composables/useSignup";
 
 const name = ref("");
 const email = ref("");
 const password = ref("");
 
-const handleSubmit = () => {
-  console.log({
-    name: name.value,
-    email: email.value,
-    password: password.value,
-  });
+const handleSubmit = async () => {
+  const { error } = await signup(email.value, password.value, name.value);
+
+  if (error) {
+    console.log(error.value);
+  }
 };
 </script>
 
