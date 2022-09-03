@@ -11,7 +11,7 @@
     </div>
     <div v-else>
       <h2>Login</h2>
-      <Login />
+      <Login @successLogin="enterChat" />
       <p>
         No account yet?
         <span @click="showForm = true">SignUp</span> instead.
@@ -24,8 +24,14 @@
 import SignUp from "@/components/SignUp.vue";
 import Login from "@/components/Login.vue";
 import { ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
 
 const showForm = ref(false);
+const router = useRouter();
+
+const enterChat = () => {
+  router.push("/chatroom");
+};
 </script>
 
 <style>

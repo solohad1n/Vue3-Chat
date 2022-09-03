@@ -7,16 +7,21 @@
 </template>
 
 <script setup>
-const { ref } = require("@vue/reactivity");
+import { ref } from "@vue/reactivity";
+import useLogin from "../composables/useLogin";
 
 const email = ref("");
 const password = ref("");
 
-const handleSubmit = () => {
-  console.log({
-    email: email.value,
-    password: password.value,
-  });
+const successLogin = defineEmits(["successLogin"]);
+
+const handleSubmit = async () => {
+  const { error, login } = useLogin();
+  await login(email.value, password.value);
+
+  if (!error.value) {
+    successLogin("successLogin");
+  }
 };
 </script>
 
