@@ -3,7 +3,7 @@
     <p>Welcome</p>
     <div v-if="showForm">
       <h2>SignUp</h2>
-      <SignUp />
+      <SignUp @successSignup="enterChat" />
       <p>
         Already registered?
         <span @click="showForm = false">LogIn</span> instead.

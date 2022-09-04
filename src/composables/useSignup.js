@@ -11,8 +11,6 @@ export const signup = async (email, password, name) => {
       displayName: name
     })
 
-    console.log(user)
-
   } catch (err) {
     error.value = err.message
   }

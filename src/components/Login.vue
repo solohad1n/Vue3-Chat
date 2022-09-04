@@ -21,6 +21,8 @@ const handleSubmit = async () => {
 
   if (!error.value) {
     successLogin("successLogin");
+  } else {
+    console.log(error.value);
   }
 };
 </script>
