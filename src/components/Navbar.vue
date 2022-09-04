@@ -1,16 +1,20 @@
 <template>
   <nav>
     <div>
-      <p>Добро Пожаловать</p>
-      <p class="email">Вы вошли в аккаунт с почтой ...</p>
+      <p>Добро Пожаловать {{ user.displayName }}</p>
+      <p class="email">Вы вошли в аккаунт с почтой {{ user.email }}</p>
     </div>
     <button @click="handleClickLogout">Выйти</button>
   </nav>
 </template>
 
 <script setup>
+import { watchEffect } from "@vue/runtime-core";
 import { useRouter } from "vue-router";
 import useLogout from "../composables/useLogout";
+import { user } from "../composables/useUser";
+
+console.log(user);
 
 const { error, logout } = useLogout();
 const router = useRouter();
@@ -24,6 +28,12 @@ const handleClickLogout = async () => {
     console.log(error.value);
   }
 };
+
+watchEffect(() => {
+  if (!user.value) {
+    router.push("/");
+  }
+}, user);
 </script>
 
 <style>
